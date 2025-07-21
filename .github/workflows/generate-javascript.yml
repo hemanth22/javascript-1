@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
       - name: Checkout Gen
         run: |
           git clone https://github.com/kubernetes-client/gen
@@ -32,7 +32,7 @@ jobs:
           # apply https://github.com/kubernetes-client/gen/pull/224
           git config --global user.name "Github Actions"
           git config --global user.email "<>"
-          git cherry-pick --strategy=recursive -X theirs c557f7f b32dcd6 0ef2cec 9701a7c
+          git cherry-pick --strategy=recursive -X theirs c557f7f b32dcd6 0ef2cec 9701a7c a608a9d
           rm -rf gen/.git
       # apply https://github.com/kubernetes-client/gen/pull/237
       - name: Patch Dockerfile

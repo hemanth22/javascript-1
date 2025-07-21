@@ -1,5 +1,8 @@
 name: Release
 
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:
     inputs:
@@ -33,7 +36,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: npm install
@@ -54,8 +57,8 @@ jobs:
         run: |
           git config --global user.name 'Github Bot'
           git config --global user.email '<>'
-          git tag ${{ github.events.inputs.version }}
+          git tag ${{ github.events.inputs.releaseVersion }}
       - name: Push tag
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
-          git push ${{ github.events.inputs.version }}
+          git push ${{ github.events.inputs.releaseVersion }}
